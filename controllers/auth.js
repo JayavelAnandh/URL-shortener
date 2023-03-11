@@ -7,6 +7,13 @@ const isAuthorized = async(req,res,next)=>{
     if(req.headers){
         try {
             token = req.headers["x-auth-token"]
+
+            if(!token){
+                return res.status(400).json({message:"Access Denied :- Invalid Authorization "})
+            }
+        
+
+
             const decode = jwt.verify(token,process.env.SECRET_KEY)
             console.log(decode);
 
@@ -18,11 +25,6 @@ const isAuthorized = async(req,res,next)=>{
             res.status(401).send(error)
         }
     }
-
-    if(!token){
-        return res.status(400).json({message:"Access Denied :- Invalid Authorization "})
-    }
-
 
 }
 
