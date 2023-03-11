@@ -6,6 +6,7 @@ import bodyParser from "body-parser"
 import { signupRouter } from "./routes/signupUser.js"
 import { loginRouter } from "./routes/loginUser.js"
 import { isAuthorized } from "./controllers/auth.js"
+import cors from "cors"
 
 const app = express()
 
