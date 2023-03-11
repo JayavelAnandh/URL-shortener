@@ -32,7 +32,7 @@ router.get("/:urlId",async(req,res)=>{
         try {
             const currentData = await urlShortenerModel.find({shortenedUrl:req.params.urlId})
             console.log(currentData)
-            res.redirect(currentData[0].longUrl)
+            res.send(currentData)
             
         } catch (error) {
             console.log(error)
