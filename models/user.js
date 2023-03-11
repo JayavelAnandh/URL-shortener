@@ -24,7 +24,10 @@ const userSchema = new mongoose.Schema(
 const User = mongoose.model("user",userSchema)
 
 const generateAuthToken = (id)=>{
-    return jwt.sign({id},process.env.SECRET_KEY)
+    return jwt.sign({id},process.env.SECRET_KEY,{
+        algorithm: JWT_ALGORITHM,
+    expiresIn: '1d'
+    })
 }
 
 export{User,generateAuthToken}
