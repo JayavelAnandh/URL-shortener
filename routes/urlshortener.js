@@ -5,7 +5,7 @@ import { urlShortenerModel } from "../models/urlShort.js"
 
 const router = express.Router()
 
-router.get("/",async(req,res)=>{
+router.get("/all",async(req,res)=>{
     try {
         const allData = await urlShortenerModel.find({})
         res.status(200).send(allData)
