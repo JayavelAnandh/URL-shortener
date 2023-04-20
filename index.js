@@ -7,6 +7,7 @@ import { signupRouter } from "./routes/signupUser.js"
 import { loginRouter } from "./routes/loginUser.js"
 import { isAuthorized } from "./controllers/auth.js"
 import cors from "cors"
+import { urlShortenerModel } from "./models/urlShort.js"
 
 const app = express()
 
@@ -20,6 +21,19 @@ app.use(cors());
 app.get("/",(req,res)=>{
     res.send("Hi,Welcome")
 })
+
+app.get("/:urlId",async(req,res)=>{
+    try {
+        const currentData = await urlShortenerModel.find({shortenedUrl:req.params.urlId})
+        console.log(currentData);
+        res.redirect(currentData.longUrl);
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("Internal Server Error")
+    }
+})
+
 
 app.use("/urlRoutes",isAuthorized,urlRoutes)
 app.use("/signup",signupRouter)

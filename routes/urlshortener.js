@@ -28,17 +28,6 @@ router.post("/create",async(req,res)=>{
     }
 })
 
-router.get("/:urlId",async(req,res)=>{
-        try {
-            const currentData = await urlShortenerModel.find({shortenedUrl:req.params.urlId})
-            console.log(currentData)
-            res.send(currentData)
-            
-        } catch (error) {
-            console.log(error)
-            res.status(500).send("Internal Server Error")
-        }
-})
 router.delete("/delete/:id",async(req,res)=>{
     try {
         const dataToDelete = await urlShortenerModel.findByIdAndDelete({_id:req.params.id})
