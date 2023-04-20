@@ -24,7 +24,8 @@ app.get("/",(req,res)=>{
 
 app.get("/:urlId",async(req,res)=>{
     try {
-        const currentData = await urlShortenerModel.find({shortenedUrl:req.params.urlId})
+        shortenedUrl = req.params.urlId;
+        const currentData = await urlShortenerModel.findOne({shortenedUrl})
         console.log(currentData);
         res.redirect(currentData.longUrl);
         
